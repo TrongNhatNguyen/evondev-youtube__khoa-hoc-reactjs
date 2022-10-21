@@ -1,0 +1,169 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+/* Tạo biến */
+:root {
+    --example: 0;
+}
+
+@font-face {
+    --font-name: Dongle-Regular;
+    font-family: 'var(--font-name)';
+    src: local('var(--font-name)'), url('./../public/fonts/dongle/Dongle-Regular.ttf');
+}
+
+body {
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    font-family: 'var(--font-name)';
+    font-size: 160%;
+    line-height: 0.8;
+    color: rgb(87, 87, 87);
+    background-color: #c5c5c5;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline-width: 0;
+}
+span,
+img {
+    display: block;
+}
+
+/* ============================= */
+.tour-container {
+    width: 100%;
+    padding: 2rem; /* bạn cần căn khung layout set các card */
+}
+.tour-cards {
+    --gap-spacing: 1.5rem; /* tạo biến set 'khoảng cách (grid) giữa các card' */
+    --columns: 4; /* tạo biến set 'số card trên 1 hàng' */
+
+    display: flex;
+    flex-wrap: wrap; /* cho phép các card rơi xuống hàng */
+    margin-left: calc(-1 * var(--gap-spacing)); /* tương đương: -1.5rem */
+}
+
+.tour-box-card {
+    --border-radius-card: 20px 20px 0px 0px;
+    background-color: white;
+    border-radius: var(--border-radius-card);
+    position: relative;
+
+    /* xếp các phần tử con cùng cấp theo hàng dọc */
+    display: flex;
+    flex-direction: column;
+
+    width: calc(
+        calc(100% / var(--columns)) - var(--gap-spacing)
+    ); /* 4 card 1 hàng trừ cho 25px grid */
+    margin-left: var(--gap-spacing);
+    margin-bottom: var(--gap-spacing);
+}
+.tour-top img {
+    border-radius: var(--border-radius-card);
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.tour-top .tour-price {
+    position: absolute;
+    top: 15px;
+    left: 25px;
+    width: auto;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: #224d66;
+    color: white;
+}
+
+.tour-content {
+    padding: 20px 20px 14px 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* set .tour-info { margin-top: auto } để căn đều 1 hàng */
+}
+
+.tour-title {
+    margin-bottom: 20px;
+
+    word-break: break-word; /* fix lỗi liền từ */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* hiển thị tiêu đề ko quá 3 hàng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.tour-info {
+    font-size: 20px;
+    display: flex;
+    align-items: flex-start;
+    margin-top: auto; /*căn đều phần tử phía dưới khi tiêu đề quá dài */
+    margin-bottom: 20px;
+}
+
+.tour-review {
+    display: inline-flex;
+    align-items: flex-start;
+}
+.tour-review img {
+    width: 18px;
+    margin-right: 10px;
+    margin-top: -4px;
+}
+.tour-duration {
+    margin-left: 8%;
+}
+.tour-button {
+    margin-bottom: 10px;
+}
+.tour-button a {
+    width: auto;
+    padding: 0px 10px;
+    text-decoration: none;
+    margin-bottom: 15px;
+    background-color: #224d66;
+    color: aliceblue;
+}
+
+/* ====================== */
+/* Reponsive */
+/* ipad to reponsive ngang */
+@media screen and (max-width: 1023px) {
+    .tour-cards {
+        --columns: 3;
+    }
+}
+
+/* ipad thường reponsive dọc */
+@media screen and (max-width: 767px) {
+    .tour-cards {
+        --columns: 2;
+    }
+}
+
+/* mobile reponsive ngang */
+@media screen and (max-width: 480px) {
+    .tour-cards {
+        --gap-spacing: 1rem;
+        --columns: 2;
+    }
+}
+
+/* mobile reponsive dọc */
+@media screen and (max-width: 320px) {
+    .tour-cards {
+        --gap-spacing: 1rem;
+        --columns: 1;
+    }
+}
